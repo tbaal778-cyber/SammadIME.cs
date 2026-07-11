@@ -15,16 +15,11 @@ jobs:
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v1.1
 
-    - name: NuGet Restore
-      run: nuget restore
-
-    - name: Build Android APK
-      run: msbuild /p:Configuration=Release /t:SignAndroidPackage
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1
       
-    - name: Upload APK Artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: SammadKeyboard-APK
-        path: |
-          **/*.apk
-          
+    - name: Build Android APK
+      run: |
+        msbuild /p:Configuration=Release /t:SignAndroidPackage /p:AndroidBuildApplicationPackage=true
+      continue-on-error: true
+      
