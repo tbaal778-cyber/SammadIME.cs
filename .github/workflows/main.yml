@@ -17,9 +17,17 @@ jobs:
 
     - name: Setup NuGet
       uses: NuGet/setup-nuget@v1
-      
+
     - name: Build Android APK
       run: |
         msbuild /p:Configuration=Release /t:SignAndroidPackage /p:AndroidBuildApplicationPackage=true
       continue-on-error: true
+
+    - name: Upload APK Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: SammadKeyboard-APK
+        path: |
+          **/*.apk
+          
       
