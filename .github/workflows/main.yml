@@ -12,22 +12,22 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v1.1
-
     - name: Setup NuGet
       uses: NuGet/setup-nuget@v1
 
-    - name: Build Android APK
-      run: |
-        msbuild /p:Configuration=Release /t:SignAndroidPackage /p:AndroidBuildApplicationPackage=true
-      continue-on-error: true
+    - name: Restore NuGet Packages
+      run: nuget restore sammadkeyboard.csproj
 
-    - name: Upload APK Artifact
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.1
+
+    - name: Build Android APK
+      run: msbuild sammadkeyboard.csproj /p:Configuration=Release /t:SignAndroidPackage /p:AndroidBuildApplicationPackage=true
+      
+    - name: Upload APK
       uses: actions/upload-artifact@v3
       with:
         name: SammadKeyboard-APK
         path: |
           **/*.apk
           
-      
