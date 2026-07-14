@@ -1,4 +1,4 @@
-رحname: Build Sammad Keyboard APK
+name: Build Sammad Keyboard APK
 
 on:
   push:
