@@ -1,4 +1,4 @@
-name: Build Sammad Keyboard APK
+رحname: Build Sammad Keyboard APK
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: windows-2019
 
     steps:
     - name: Checkout Code
